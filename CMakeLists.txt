@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(gflags_catkin)
+project(glog_catkin)
 
 find_package(catkin_simple REQUIRED)
 catkin_simple()
