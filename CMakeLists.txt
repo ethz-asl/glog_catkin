@@ -18,7 +18,9 @@ endif()
 ExternalProject_Add(glog_src
   SVN_REPOSITORY http://google-glog.googlecode.com/svn/trunk/
   UPDATE_COMMAND ""
-  CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic --with-gflags=${CATKIN_DEVEL_PREFIX} --prefix=${CATKIN_DEVEL_PREFIX} && ${PATCH_MAKEFILE}
+  CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
+    --with-gflags=${CATKIN_DEVEL_PREFIX} 
+    --prefix=${CATKIN_DEVEL_PREFIX} && ${PATCH_MAKEFILE}
   BUILD_COMMAND cd ../glog_src && make -j8
   INSTALL_COMMAND cd ../glog_src && make install -j8
 )
