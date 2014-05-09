@@ -25,10 +25,10 @@ ExternalProject_Add(glog_src
   INSTALL_COMMAND cd ../glog_src && make install -j8
 )
 
-link_directories( ${CATKIN_DEVEL_PREFIX}/lib )
 cs_add_library(${PROJECT_NAME}_dependency_tracker src/dependency_tracker.cc)
 add_dependencies(${PROJECT_NAME}_dependency_tracker glog_src)
-target_link_libraries(${PROJECT_NAME}_dependency_tracker glog)
+target_link_libraries(${PROJECT_NAME}_dependency_tracker
+  ${CATKIN_DEVEL_PREFIX}/lib/libglog${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 cs_install()
 
