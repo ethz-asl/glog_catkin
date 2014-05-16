@@ -16,7 +16,7 @@ if(APPLE)
 endif()
 
 ExternalProject_Add(glog_src
-  SVN_REPOSITORY http://google-glog.googlecode.com/svn/trunk/
+  URL https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
     --with-gflags=${CATKIN_DEVEL_PREFIX} 
