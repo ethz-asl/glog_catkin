@@ -4,9 +4,6 @@ project(glog_catkin)
 find_package(catkin_simple REQUIRED)
 catkin_simple()
 
-message("gflags_catkin_PREFIX: ${gflags_catkin_PREFIX}")
-message("gflags_catkin_LIBRARIES: ${gflags_catkin_LIBRARIES}")
-
 include(ExternalProject)
 
 # We don't know why catkin doesn't make this directory
@@ -18,8 +15,8 @@ ExternalProject_Add(glog_src
   CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
     --with-gflags=${gflags_catkin_PREFIX}
     --prefix=${CATKIN_DEVEL_PREFIX}
-  BUILD_COMMAND cd ../glog_src && make 
-  INSTALL_COMMAND cd ../glog_src && make install 
+  BUILD_COMMAND cd ../glog_src && make -j 8
+  INSTALL_COMMAND cd ../glog_src && make install -j 8
 )
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
