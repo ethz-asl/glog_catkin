@@ -6,29 +6,21 @@ catkin_simple()
 
 include(ExternalProject)
 
-# On OSX, with gtest installed by homebrew,
-# the configure script comes up with the wrong
-# answer for the extention of the gtest library.
-# Patching the Makefile fixes this.
-set(PATCH_MAKEFILE echo "Nothing to patch")
-if(APPLE)
-  set(PATCH_MAKEFILE sed -i.bu "s/libgtest.la/libgtest.dylib/g" Makefile)
-endif()
+file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(glog_src
-  SVN_REPOSITORY http://google-glog.googlecode.com/svn/trunk/
+  URL http://robotics.ethz.ch/files/glog-2014-05-16.tgz
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
-    --with-gflags=${CATKIN_DEVEL_PREFIX} 
-    --prefix=${CATKIN_DEVEL_PREFIX} && ${PATCH_MAKEFILE}
-  BUILD_COMMAND cd ../glog_src && ${PATCH_MAKEFILE} && make -j8
-  INSTALL_COMMAND cd ../glog_src && ${PATCH_MAKEFILE} && make install -j8
+    --with-gflags=${gflags_catkin_PREFIX}
+    --prefix=${CATKIN_DEVEL_PREFIX}
+  BUILD_COMMAND cd ../glog_src && make -j 8
+  INSTALL_COMMAND cd ../glog_src && make install -j 8
 )
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
 add_dependencies(${PROJECT_NAME} glog_src)
-target_link_libraries(${PROJECT_NAME}
-  ${CATKIN_DEVEL_PREFIX}/lib/libglog${CMAKE_SHARED_LIBRARY_SUFFIX})
+target_link_libraries(${PROJECT_NAME} ${CATKIN_DEVEL_PREFIX}/lib/libglog${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 cs_install()
 
