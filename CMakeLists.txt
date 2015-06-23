@@ -9,7 +9,7 @@ include(ExternalProject)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(glog_src
-  URL http://robotics.ethz.ch/files/glog-2014-05-16.tgz
+  URL https://github.com/google/glog/archive/v0.3.4.zip
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
     --with-gflags=${gflags_catkin_PREFIX}
