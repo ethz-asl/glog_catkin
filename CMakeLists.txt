@@ -9,7 +9,7 @@ include(ExternalProject)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(glog_src
-  URL https://github.com/google/glog/archive/v0.3.4.zip
+  DOWNLOAD_COMMAND wget --retry-connrefused --waitretry=1 --timeout=12 --tries 10 https://github.com/google/glog/archive/v0.3.4.zip
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../glog_src && ./configure --with-pic 
     --with-gflags=${gflags_catkin_PREFIX}
