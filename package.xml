@@ -10,4 +10,5 @@
   <buildtool_depend>catkin_simple</buildtool_depend>
   
   <build_depend>gflags_catkin</build_depend>
+  <build_depend>unzip</build_depend>
 </package>
