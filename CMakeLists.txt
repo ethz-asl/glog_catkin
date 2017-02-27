@@ -10,13 +10,13 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 set(VERSION 0.3.4)
 ExternalProject_Add(glog_src
-  DOWNLOAD_COMMAND wget --retry-connrefused --waitretry=1 --timeout=12 --tries 10 https://github.com/google/glog/archive/v${VERSION}.zip
-  UPDATE_COMMAND unzip -d . -o ../v${VERSION}.zip
-  CONFIGURE_COMMAND cd ../glog_src/glog-${VERSION} && ./configure --with-pic 
+  URL https://github.com/google/glog/archive/v${VERSION}.zip
+  UPDATE_COMMAND ""
+  CONFIGURE_COMMAND cd ../glog_src/ && ./configure --with-pic
     --with-gflags=${gflags_catkin_PREFIX}
     --prefix=${CATKIN_DEVEL_PREFIX}
-  BUILD_COMMAND cd ../glog_src/glog-${VERSION} && make -j 8
-  INSTALL_COMMAND cd ../glog_src/glog-${VERSION} && make install -j 8
+  BUILD_COMMAND cd ../glog_src/ && make -j 8
+  INSTALL_COMMAND cd ../glog_src/ && make install -j 8
 )
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
