@@ -16,7 +16,7 @@ ExternalProject_Add(glog_src
     --with-gflags=${gflags_catkin_PREFIX}
     --prefix=${CATKIN_DEVEL_PREFIX}
   BUILD_COMMAND cd ../glog_src/ && make -j 8
-  INSTALL_COMMAND cd ../glog_src/ && make install -j 8
+  INSTALL_COMMAND cd ../glog_src/ && make install -j 8 DESTDIR=
 )
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
