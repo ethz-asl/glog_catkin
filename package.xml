@@ -1,4 +1,4 @@
-<package>
+<package format="2">
   <name>glog_catkin</name>
   <version>0.0.0</version>
   <description>glog_catkin</description>
@@ -9,5 +9,5 @@
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
 
-  <build_depend>gflags_catkin</build_depend>
+  <depend>gflags_catkin</depend>
 </package>
