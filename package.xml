@@ -6,6 +6,7 @@
 
   <license>See package</license>
 
+  <buildtool_depend>automake</buildtool_depend>
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
   
