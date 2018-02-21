@@ -13,7 +13,7 @@ ExternalProject_Add(glog_src
   URL https://github.com/google/glog/archive/v${VERSION}.zip
   UPDATE_COMMAND ""
   PATCH_COMMAND patch -p0 < ${CMAKE_SOURCE_DIR}/fix-unused-typedef-warning.patch
-  CONFIGURE_COMMAND cd ../glog_src/ && ./configure --with-pic
+  CONFIGURE_COMMAND cd ../glog_src/ && autoreconf -fi && ./configure --with-pic
     --with-gflags=${gflags_catkin_PREFIX}
     --prefix=${CATKIN_DEVEL_PREFIX}
   BUILD_COMMAND cd ../glog_src/ && make -j 8
