@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(glog_catkin)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple()
+find_package(catkin REQUIRED COMPONENTS gflags_catkin)
 
 include(ExternalProject)
 
@@ -20,11 +19,12 @@ ExternalProject_Add(glog_src
   INSTALL_COMMAND cd ../glog_src/ && make install -j 8
 )
 
-cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
-add_dependencies(${PROJECT_NAME} glog_src)
-target_link_libraries(${PROJECT_NAME} ${CATKIN_DEVEL_PREFIX}/lib/libglog${CMAKE_SHARED_LIBRARY_SUFFIX})
-
-cs_install()
-
-cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-  CFG_EXTRAS glog-extras.cmake)
+include_directories(include ${CATKIN_DEVEL_PREFIX}/include ${catkin_INCLUDE_DIRS})
+catkin_package(
+  INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include ${catkin_INCLUDE_DIRS}
+  LIBRARIES glog)
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/glog DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/
+        DESTINATION ${CATKIN_GLOBAL_LIB_DESTINATION}
+        FILES_MATCHING PATTERN "libglog*")
