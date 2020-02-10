@@ -17,7 +17,7 @@ include(cmake/glog-catkin-extras.cmake.in)
 set(USE_SYSTEM_GLOG "AUTO" CACHE INTERNAL "Whether to use the system version of Glog.")
 
 # Check if the version is suitable, otherwise force downloading the newer one.
-if(USE_SYSTEM_GLOG STREQUAL "AUTO")
+if(USE_SYSTEM_GLOG STREQUAL "AUTO" OR USE_SYSTEM_GLOG STREQUAL "ON")
   find_package(Glog QUIET)
   if(GLOG_FOUND)
     set(USE_SYSTEM_GLOG "ON")
@@ -56,6 +56,7 @@ if(USE_SYSTEM_GLOG STREQUAL "OFF")
             LIBRARIES glog)
 else()
   message(STATUS "Using system Glog.")
+  find_package(Glog REQUIRED)
   cs_install()
   cs_export(INCLUDE_DIRS  ${GLOG_INCLUDE_DIRS}
             LIBRARIES     ${GLOG_LIBRARIES})
