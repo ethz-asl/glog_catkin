@@ -12,7 +12,7 @@ set(VERSION 0.5.0)
 ExternalProject_Add(glog_src
   URL https://github.com/google/glog/archive/v${VERSION}.zip
   UPDATE_COMMAND ""
-  CONFIGURE_COMMAND cd ../glog_src/ && cmake -S . -B build -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} 
+  CONFIGURE_COMMAND cd ../glog_src/ && mkdir build && cmake -S . -B build -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} 
   BUILD_COMMAND cd ../glog_src/ && cmake --build build -j 8
   INSTALL_COMMAND cd ../glog_src/ && cmake --build build --target install
 )
