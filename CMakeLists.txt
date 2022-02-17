@@ -8,16 +8,13 @@ include(ExternalProject)
 
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
-set(VERSION 0.3.5)
+set(VERSION 0.5.0)
 ExternalProject_Add(glog_src
   URL https://github.com/google/glog/archive/v${VERSION}.zip
   UPDATE_COMMAND ""
-  PATCH_COMMAND patch -p0 < ${CMAKE_CURRENT_SOURCE_DIR}/fix-unused-typedef-warning.patch
-  CONFIGURE_COMMAND cd ../glog_src/ && autoreconf -fi && ./configure --with-pic
-    --with-gflags=${gflags_catkin_PREFIX}
-    --prefix=${CATKIN_DEVEL_PREFIX}
-  BUILD_COMMAND cd ../glog_src/ && make -j 8
-  INSTALL_COMMAND cd ../glog_src/ && make install -j 8
+  CONFIGURE_COMMAND cd ../glog_src/ && cmake -S . -B build -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} 
+  BUILD_COMMAND cd ../glog_src/ && cmake --build build -j 8
+  INSTALL_COMMAND cd ../glog_src/ && cmake --build build --target install
 )
 
 install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/glog
